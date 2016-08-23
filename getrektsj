@@ -1,5 +1,6 @@
 #!/bin/bash
-
+echo "Available network interfaces:"
+echo $(ls --color /sys/class/net | sed '/lo/d')
 echo -n "Enter the name of the network interface: "
 read userInput
 tempString="$(sudo cat /dev/urandom | tr -cd 'a-f0-9' | head -c 16)"
@@ -13,9 +14,5 @@ for (( i=0; i<${#tempString}; i++)); do
 done 
 
 randomHex=${randomHex::-1}
-
-echo $userInput
-echo $tempString
-echo $randomHex
-
 sudo ifconfig $userInput down hw ether $randomHex && sudo ifconfig $userInput up
+echo "All done!"
