@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo -n "Enter the name of the network interface: "
+read userInput
+tempString="$(sudo cat /dev/urandom | tr -cd 'a-f0-9' | head -c 16)"
+reandomHex=""
+
+for (( i=0; i<${#tempString}; i++)); do
+	randomHex+=${tempString:$i:1}
+	if [ $((i%2)) -eq 1 ]; then
+		randomHex+=":";	
+	fi
+done 
+
+randomHex=${randomHex::-1}
+
+echo $userInput
+echo $tempString
+echo $randomHex
+
+sudo ifconfig $userInput down hw ether $randomHex && sudo ifconfig $userInput up
