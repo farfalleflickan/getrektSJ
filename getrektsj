@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Disconnect from any wifi before continuing."
+echo "Disconnect from any wifi network before continuing."
 echo "Available network interfaces:"
 echo $(ls --color /sys/class/net | sed '/lo/d')
 echo -n "Enter the name of the network interface: "
