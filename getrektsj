@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Disconnect from any wifi network before continuing."
+echo "Disconnect from any wifi before continuing."
 echo "Available network interfaces:"
 echo $(ls --color /sys/class/net | sed '/lo/d')
 echo -n "Enter the name of the network interface: "
@@ -12,8 +12,8 @@ for (( i=0; i<${#tempString}; i++)); do
 	if [ $((i%2)) -eq 1 ]; then
 		randomHex+=":";	
 	fi
-done 
-
+done
 randomHex=${randomHex::-1}
+sudo ifconfig $userInput down;
 sudo ifconfig $userInput down hw ether $randomHex && sudo ifconfig $userInput up
 echo "All done!"
