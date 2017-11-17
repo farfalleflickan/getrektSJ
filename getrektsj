@@ -9,7 +9,7 @@ else
 	userInput=$1;
 fi
 
-currentHex="$(ip addr show wlp1s0 | grep link/ether | tr -s ' ' | cut -d ' ' -f3)"
+currentHex="$(ip addr show $userInput | grep link/ether | tr -s ' ' | cut -d ' ' -f3)"
 echo $currentHex
 tempString="$(sudo cat /dev/urandom | tr -cd 'a-f0-9' | head -c 10)"
 randomHex=${currentHex:0:3}
